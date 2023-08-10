@@ -3,9 +3,7 @@ require("hardhat-contract-sizer")
 require("@nomicfoundation/hardhat-toolbox")
 require("dotenv").config()
 require("hardhat-deploy")
-// require("@nomicfoundation/hardhat-chai-matchers")
 require("@nomicfoundation/hardhat-ethers")
-require("hardhat-deploy")
 require("hardhat-deploy-ethers")
 const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY || "key"
 const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL || "https://eth-sepolia"
@@ -28,7 +26,7 @@ module.exports = {
             chainId: 11155111,
             saveDeployments: true,
             blockConfirmations: 6,
-            gas: 6000000,
+            // gas: 6000000,
         },
         goerli: {
             url: GOERLI_RPC_URL,
@@ -80,6 +78,7 @@ module.exports = {
         // yarn hardhat verify --network <NETWORK> <CONTRACT_ADDRESS> <CONSTRUCTOR_PARAMETERS>
         apiKey: {
             sepolia: ETHERSCAN_API_KEY,
+            goerli: ETHERSCAN_API_KEY,
         },
     },
     contractSizer: {
