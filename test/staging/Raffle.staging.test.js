@@ -15,7 +15,7 @@ developmentChains.includes(network.name)
           })
 
           describe("fulfillRandomWords", function () {
-              it("works with life ChainlinkKeepers and Chainlunk VRF, randomly picks winner", async () => {
+              it("works with life ChainlinkKeepers and Chainlunk VRF, randomly picks winner", async function () {
                   console.log("Setting up test...")
                   const startingTimeStamp = await raffle.getLatestTimeStamp()
                   const accounts = await ethers.getSigners()
@@ -26,6 +26,7 @@ developmentChains.includes(network.name)
                           console.log("WinnerPicked event fired!")
                           try {
                               const recentWinner = await raffle.getRecentWinner()
+                              console.log(recentWinner)
                               const winnerEndingBalance = await ethers.provider.getBalance(
                                   accounts[0].address,
                               )
@@ -33,16 +34,24 @@ developmentChains.includes(network.name)
                               console.log(winnerEndingBalance)
                               console.log(winnerStartingBalance + raffleEntranceFee)
                               const endingTimeStamp = await raffle.getLatestTimeStamp()
+                              console.log(endingTimeStamp)
                               const raffleState = await raffle.getRaffleState()
+                              console.log(raffleState)
                               await expect(raffle.getPlayers(0)).to.be.reverted
+                              console.log("assert on players revert done")
                               assert(endingTimeStamp > startingTimeStamp)
+                              console.log("assert on timestamp done")
                               assert.equal(raffleState, 0n)
+                              console.log("assert on state done")
                               assert.equal(
                                   winnerEndingBalance,
                                   winnerStartingBalance + raffleEntranceFee,
                               )
+                              console.log("assert on winnerbalance done")
                               assert.equal(recentWinner, accounts[0].address)
+                              console.log("assert on winner address done")
                               resolve()
+                              console.log("resolve done")
                           } catch (error) {
                               console.log(error)
                               reject(error)

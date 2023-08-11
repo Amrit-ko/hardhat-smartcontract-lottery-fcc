@@ -25,7 +25,7 @@ module.exports = {
             accounts: [PRIVATE_KEY],
             chainId: 11155111,
             saveDeployments: true,
-            blockConfirmations: 6,
+            // blockConfirmations: 6,
             // gas: 6000000,
         },
         goerli: {
@@ -72,7 +72,7 @@ module.exports = {
         },
     },
     mocha: {
-        timeout: 300000,
+        timeout: 500000,
     },
     etherscan: {
         // yarn hardhat verify --network <NETWORK> <CONTRACT_ADDRESS> <CONSTRUCTOR_PARAMETERS>

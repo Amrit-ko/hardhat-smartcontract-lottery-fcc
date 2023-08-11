@@ -158,16 +158,16 @@ const { assert, expect } = require("chai")
                               const lastTimeStamp = await raffle.getLatestTimeStamp()
                               const raffleState = await raffle.getRaffleState()
                               assert.equal(recentWinner, accounts[1].address)
-                              assert.equal(numberOfPlayers.toString(), "0")
+                              assert.equal(numberOfPlayers, 0n)
                               assert(lastTimeStamp > startingTimeStamp)
-                              assert.equal(raffleState.toString(), "0")
+                              assert.equal(raffleState, 0n)
                               assert.equal(
                                   winnerEndingBalance,
                                   winnerStartingBalance + totalNumbersOfPlayers * raffleEntranceFee,
                               )
                               resolve()
                           } catch (error) {
-                              reject(e)
+                              reject(error)
                           }
                       })
                       const winnerStartingBalance = await ethers.provider.getBalance(
