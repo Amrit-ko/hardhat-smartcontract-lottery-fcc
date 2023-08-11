@@ -72,7 +72,8 @@ module.exports = {
         },
     },
     mocha: {
-        timeout: 500000,
+        timeout: 200000,
+        exit: true,
     },
     etherscan: {
         // yarn hardhat verify --network <NETWORK> <CONTRACT_ADDRESS> <CONSTRUCTOR_PARAMETERS>

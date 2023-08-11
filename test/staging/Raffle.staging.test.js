@@ -1,11 +1,10 @@
-const { network, getNamedAccounts, deployments, ethers } = require("hardhat")
-const { developmentChains, networkConfig } = require("../../helper-hardhat-config")
+const { network, getNamedAccounts, ethers } = require("hardhat")
+const { developmentChains } = require("../../helper-hardhat-config")
 const { assert, expect } = require("chai")
-const { isCallTrace } = require("hardhat/internal/hardhat-network/stack-traces/message-trace")
 
 developmentChains.includes(network.name)
     ? describe.scip
-    : describe("Raffle Unit Test", async function () {
+    : describe("Raffle Unit Test", function () {
           let raffle, deployer, raffleEntranceFee
 
           beforeEach(async () => {
@@ -26,30 +25,19 @@ developmentChains.includes(network.name)
                           console.log("WinnerPicked event fired!")
                           try {
                               const recentWinner = await raffle.getRecentWinner()
-                              console.log(recentWinner)
                               const winnerEndingBalance = await ethers.provider.getBalance(
                                   accounts[0].address,
                               )
-                              console.log(winnerEndingBalance - raffleEntranceFee)
-                              console.log(winnerEndingBalance)
-                              console.log(winnerStartingBalance + raffleEntranceFee)
                               const endingTimeStamp = await raffle.getLatestTimeStamp()
-                              console.log(endingTimeStamp)
                               const raffleState = await raffle.getRaffleState()
-                              console.log(raffleState)
                               await expect(raffle.getPlayers(0)).to.be.reverted
-                              console.log("assert on players revert done")
                               assert(endingTimeStamp > startingTimeStamp)
-                              console.log("assert on timestamp done")
                               assert.equal(raffleState, 0n)
-                              console.log("assert on state done")
                               assert.equal(
                                   winnerEndingBalance,
                                   winnerStartingBalance + raffleEntranceFee,
                               )
-                              console.log("assert on winnerbalance done")
                               assert.equal(recentWinner, accounts[0].address)
-                              console.log("assert on winner address done")
                               resolve()
                               console.log("resolve done")
                           } catch (error) {
@@ -64,8 +52,8 @@ developmentChains.includes(network.name)
                       const winnerStartingBalance = await ethers.provider.getBalance(
                           accounts[0].address,
                       )
-                      console.log(winnerStartingBalance)
                   })
+                  console.log("Success")
               })
           })
       })
