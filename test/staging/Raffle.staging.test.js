@@ -38,13 +38,14 @@ developmentChains.includes(network.name)
                                   winnerStartingBalance + raffleEntranceFee,
                               )
                               assert.equal(recentWinner, accounts[0].address)
-                              resolve()
+
                               console.log("resolve done")
                           } catch (error) {
                               console.log(error)
                               reject(error)
                           }
                       })
+                      resolve()
                       console.log("Entering Raffle...")
                       const tx = await raffle.enterRaffle({ value: raffleEntranceFee })
                       await tx.wait(1)

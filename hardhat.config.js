@@ -15,6 +15,11 @@ const REPORT_GAS = process.env.REPORT_GAS || false
 module.exports = {
     defaultNetwork: "hardhat",
     networks: {
+        localhost: {
+            chainId: 31337,
+            // gasPrice: 130000000000,
+            blockConfirmations: 1,
+        },
         hardhat: {
             chainId: 31337,
             // gasPrice: 130000000000,
